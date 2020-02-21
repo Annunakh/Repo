@@ -10,12 +10,14 @@ public class NavigationUI extends MainPageObject {
 
     private static final String
         MY_LISTS_LINK = "//android.widget.FrameLayout[@content-desc='My lists']",
-        NO_THANKS_BUTTON = "//*[@text='NO THANKS']";
+        DECLINE_SYNC_BUTTON = "//*[@text='NO THANKS']";
 
     public NavigationUI(AppiumDriver driver) {
         super(driver);
         this.driver = driver;
     }
+
+    /* UTIL METHODS */
 
     public void pressBackButton() {
         List<MobileElement> buttons = driver.findElementsByClassName("android.widget.ImageButton");
@@ -33,7 +35,7 @@ public class NavigationUI extends MainPageObject {
 
     public void declineSyncMyLists() {
         this.waitForElementAndClick(
-                By.xpath(NO_THANKS_BUTTON),
+                By.xpath(DECLINE_SYNC_BUTTON),
                 "Cannot decline sync reading list",
                 5
         );
