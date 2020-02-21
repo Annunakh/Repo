@@ -1,12 +1,15 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+
+import java.util.List;
 
 public class MyListsPageObject extends MainPageObject {
 
     public static final String
-        FOLDER_BY_NAME_TPL = "//*[@resource-id='org.wikipedia:id/item_title'][@text='{FOLDER_NAME}']",
+        FOLDER_BY_NAME_TPL = "//android.view.ViewGroup/android.widget.TextView[@text='{FOLDER_NAME}']",
         ARTICLE_BY_TITLE_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']";
 
     private static String getFolderXpathByName(String name_of_folder) {
@@ -22,7 +25,9 @@ public class MyListsPageObject extends MainPageObject {
     }
 
     public void openFolderByName(String name_of_folder) {
+        this.waitForFolderToAppearByTitle(name_of_folder);
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
+        System.out.println("Folder to open: " + folder_name_xpath);
         this.waitForElementAndClick(
                 By.xpath(folder_name_xpath),
                 "Cannot find previously created folder by name " + name_of_folder,
@@ -37,16 +42,27 @@ public class MyListsPageObject extends MainPageObject {
                 15
         );
     }
+
     public void waitForArticleToAppearByTitle(String article_title) {
-        String article_xpath = getSavedArticleXpathByTitle(article_title);
+        String saved_article_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementPresent(
-                By.xpath(article_xpath),
+                By.xpath(saved_article_xpath),
                 "Cannot find saved article by title " + article_title,
                 15
         );
     }
 
+    public void waitForFolderToAppearByTitle(String folder_name) {
+        String saved_folder_xpath = getFolderXpathByName(folder_name);
+        this.waitForElementPresent(
+                By.xpath(saved_folder_xpath),
+                "Cannot find saved article by title " + folder_name,
+                15
+        );
+    }
+
     public void swipeByArticleToDelete(String article_title) {
+        System.out.println("title: " + article_title);
         this.waitForArticleToAppearByTitle(article_title);
         String article_xpath = getSavedArticleXpathByTitle(article_title);
         this.swipeElementToLeft(

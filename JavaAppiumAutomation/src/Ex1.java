@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
-public class HomeWorkTest {
+public class Ex1 {
     private AppiumDriver<MobileElement> driver;
 
     @Before

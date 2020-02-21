@@ -30,13 +30,13 @@ public class MainPageObject {
         return waitForElementPresent(by, error_message, 5);
     }
 
-    public WebElement waitForElementAndClick(By by, String error_message, long timeoutINSec) {
-        WebElement element = waitForElementPresent(by, error_message, 5);
-        element.click();
-        return element;
+    public WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds) {
+        WebElement clickable_element = waitForElementPresent(by, error_message, 10);
+        clickable_element.click();
+        return clickable_element;
     }
 
-    public WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutINSec) {
+    public WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds) {
         MobileElement element = (MobileElement) waitForElementPresent(by, error_message, 5);
         element.setValue(value);
 //        element.sendKeys(value);

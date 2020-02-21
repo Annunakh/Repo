@@ -8,7 +8,7 @@ public class ArticlePageObject extends MainPageObject {
 
     private static final String
         TITLE_TPL = "//*[@class='android.view.View'][@content-desc='{article_title}']",
-        TITLE = "//*[@class='android.view.View'][1][@content-desc='Object-oriented programming language']",
+        TITLE = "//*[@class='android.view.View'][@resource-id='pagelib_edit_section_title_description']",
         FOOTER_ELEMENT = "//*[@resource-id='org.wikipedia:id/page_external_link'][@text='View page in browser']",
         ADD_ARTICLE_BUTTON = "org.wikipedia:id/article_menu_bookmark",
         ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
@@ -24,14 +24,13 @@ public class ArticlePageObject extends MainPageObject {
         super(driver);
     }
 
-    public WebElement waitForTitleElement(String article_title) {
-        String title_xpath = getArticleTitleXpath(article_title);
-        return this.waitForElementPresent(By.xpath(title_xpath), "Cannot find article title on page", 15);
+    public WebElement waitForTitleElement() {
+        return this.waitForElementPresent(By.xpath(TITLE), "Cannot find article title on page", 15);
     }
 
-    public String getArticleTitle(String article_title) {
-        WebElement title_element = waitForTitleElement(article_title);
-        System.out.println(title_element.getAttribute("name"));
+    public String getArticleTitle() {
+        WebElement title_element = waitForTitleElement();
+        System.out.println("Title :" + title_element.getAttribute("name"));
         return title_element.getAttribute("name");
     }
 

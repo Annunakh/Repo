@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class SearchPageObject extends MainPageObject {
@@ -11,7 +12,9 @@ public class SearchPageObject extends MainPageObject {
         SEARCH_INPUT = "org.wikipedia:id/search_src_text",
         SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING}']",
         SEARCH_DESCRIPTION_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']",
-        SEARCH_BACK_BUTTON = "//android.widget.ImageButton[1]";
+        SEARCH_BACK_BUTTON = "//android.widget.ImageButton[1]",
+        SEARCH_RESULTS_LIST = "org.wikipedia:id/search_results_list",
+        SEARCH_EMPTY_RESULT = "org.wikipedia:id/search_empty_view";
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -69,5 +72,31 @@ public class SearchPageObject extends MainPageObject {
     public void clickByArticleWithDescription(String substring) {
         String search_result_xpath = getResultDescriptionElement(substring);
         this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + substring, 10);
+    }
+
+    public int getAmountOfFoundArticles() {
+        this.waitForElementPresent(
+                By.id(SEARCH_RESULTS_LIST),
+                "Cannot find any search results",
+                10
+        );
+        return this.get_amount_of_elements(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[@class='android.view.ViewGroup']")
+        );
+    }
+
+    public void waitForEmptyResultsLabel() {
+        this.waitForElementPresent(
+                By.id(SEARCH_EMPTY_RESULT),
+                "The result is not empty",
+                15
+        );
+    }
+
+    public void assertThereIsNoResultOfSearch() {
+        this.assertElementNotPresent(
+                By.xpath(SEARCH_RESULTS_LIST),
+                "We supposed not to find any results"
+        );
     }
 }
