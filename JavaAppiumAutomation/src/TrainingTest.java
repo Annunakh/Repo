@@ -27,7 +27,7 @@ public class TrainingTest extends CoreTestCase {
         SearchPageObject.skipOnBoarding();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.waitForSearchResult("Object-oriented programming language");
+        SearchPageObject.waitForSearchResultWithDescription("Object-oriented programming language");
     }
 
     @Test

@@ -10,6 +10,7 @@ public class SearchPageObject extends MainPageObject {
         SEARCH_INIT_ELEMENT = "//*[contains(@text, 'Search Wikipedia')]",
         SEARCH_INPUT = "org.wikipedia:id/search_src_text",
         SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING}']",
+        SEARCH_DESCRIPTION_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']",
         SEARCH_BACK_BUTTON = "//android.widget.ImageButton[1]";
 
     public SearchPageObject(AppiumDriver driver) {
@@ -18,6 +19,10 @@ public class SearchPageObject extends MainPageObject {
     /* TEMPLATES METHODS */
     private static String getResultSearchElement(String substring) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+
+    private static String getResultDescriptionElement(String substring) {
+        return SEARCH_DESCRIPTION_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
     /* TEMPLATES METHODS */
 
@@ -36,7 +41,12 @@ public class SearchPageObject extends MainPageObject {
 
     public void waitForSearchResult(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
-        this.waitForElementPresent(By.xpath(search_result_xpath), "Cannot find search result with substring" + substring);
+        this.waitForElementPresent(By.xpath(search_result_xpath), "Cannot find search result with substring " + substring);
+    }
+
+    public void waitForSearchResultWithDescription(String substring) {
+        String search_description_xpath = getResultDescriptionElement(substring);
+        this.waitForElementPresent(By.xpath(search_description_xpath), "Cannot find search result with substring " + substring);
     }
 
     public void waitForBackButtonToAppear() {
@@ -53,6 +63,11 @@ public class SearchPageObject extends MainPageObject {
 
     public void clickByArticleWithSubstring(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
+        this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + substring, 10);
+    }
+
+    public void clickByArticleWithDescription(String substring) {
+        String search_result_xpath = getResultDescriptionElement(substring);
         this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + substring, 10);
     }
 }
