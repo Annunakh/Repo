@@ -5,6 +5,9 @@ import lib.ui.SearchPageObject;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SearchTests extends CoreTestCase {
 
     @Test
@@ -59,5 +62,34 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.typeSearchLine(search_line);
         SearchPageObject.waitForEmptyResultsLabel();
         SearchPageObject.assertThereIsNoResultOfSearch();
+    }
+
+    @Test
+    public void testCheckExpectedSearchResultsByTitleAndDescription() {
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.skipOnBoarding();
+        SearchPageObject.initSearchInput();
+
+        String text_to_search = "Linkin Park discography";
+        SearchPageObject.typeSearchLine(text_to_search);
+
+        int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
+        Assert.assertTrue(
+                "We found less than 3 results",
+                amount_of_search_results >= 3
+        );
+
+        Map<String, String> results_to_check = new HashMap<>();
+        results_to_check.put("Linkin Park discography", "Band discography");
+        results_to_check.put("Linkin Park", "American alternative rock band");
+        results_to_check.put("Hybrid Theory", "2000 studio album by Linkin Park");
+
+        for (Map.Entry<String, String> entry : results_to_check.entrySet()) {
+            String title = entry.getKey();
+            String description = entry.getValue();
+            SearchPageObject.waitForElementByTitleAndDescription(title, description);
+        }
     }
 }

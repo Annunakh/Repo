@@ -4,6 +4,9 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -17,13 +20,20 @@ public class SearchPageObject extends MainPageObject {
         SEARCH_DESCRIPTION_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']",
         SEARCH_BACK_BUTTON = "//android.widget.ImageButton[1]",
         SEARCH_RESULTS_LIST = "org.wikipedia:id/search_results_list",
-        SEARCH_EMPTY_RESULT = "org.wikipedia:id/search_empty_view";
+        SEARCH_EMPTY_RESULT = "org.wikipedia:id/search_empty_view",
+        PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION_TPL = "//*[@class='android.view.ViewGroup' and " +
+                    "./*[@resource-id='org.wikipedia:id/page_list_item_title' and @text='{TITLE}'] and " +
+                    "./*[@resource-id='org.wikipedia:id/page_list_item_description' and @text='{DESCRIPTION}']]";
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
     }
 
     /* TEMPLATES METHODS */
+    private static String getSearchResultByTitleAndDescription(String title, String description) {
+        String title_and_description_xpath = PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION_TPL.replace("{TITLE}", title).replace("{DESCRIPTION}", description);
+        return title_and_description_xpath;
+    }
 
     private static String getResultSearchElement(String substring) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
@@ -126,4 +136,15 @@ public class SearchPageObject extends MainPageObject {
             throw new AssertionError(default_message);
         }
     }
+
+    public void waitForElementByTitleAndDescription(String title, String description) {
+        String title_and_description_xpath = getSearchResultByTitleAndDescription(title, description);
+
+        waitForElementPresent(
+                By.xpath(title_and_description_xpath),
+                "Cannot find element with expected title: " + title,
+                10
+        );
+    }
 }
+
