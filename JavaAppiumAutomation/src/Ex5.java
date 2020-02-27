@@ -1,6 +1,8 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 
 public class Ex5 {
@@ -229,7 +232,7 @@ public class Ex5 {
         return element;
     }
 
-    protected void swipeElementToLeft(By by, String error_message) {
+    public void swipeElementToLeft(By by, String error_message) {
         WebElement element = waitForElementPresent(
                 by,
                 error_message,
@@ -242,11 +245,12 @@ public class Ex5 {
         int middle_y = (upper_y + lower_y) / 2;
 
         TouchAction action = new TouchAction(driver);
-        action.press(right_x, middle_y)
-                .waitAction(300)
-                .moveTo(left_x, middle_y)
-                .release()
-                .perform();
+        action.press(PointOption.point(right_x, middle_y));
+        action.waitAction(WaitOptions.waitOptions(Duration.ofMillis(300)));
+        action.moveTo(PointOption.point(left_x, middle_y));
+        action.release();
+        action.perform();
+
     }
 
     private int get_amount_of_elements(By by) {

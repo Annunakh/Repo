@@ -1,0 +1,12 @@
+Вот что надо сделать:
+- установить (если еще нет) XCode 11
+- скачать Appium Desktop версии 1.15 https://github.com/appium/appium-desktop/releases/tag/v1.15.1
+- скачать версию библиотеки java_client.jar версии 6.0.0 https://repo1.maven.org/maven2/io/appium/java-client/6.1.0/java-client-6.1.0.jar
+- скачать версию Selenium версии 3.14 и установить ее вместо 3.04 (selenium-server-standalone-3.14.0.jar **в аттаче**)
+- скачать и подключить библиотеку javax.websocket-api-1.1.jar (**в аттаче**)
+- запустить .app файл Википедии (**в аттаче**) __ИЛИ__ собрать самостоятельно из репозитория https://github.com/wikimedia/wikipedia-ios
+- внести небольшие изменений в код (это надо после обновления библиотеки java-client.jar): 
+-- заменить места, где мы передавали время типом данных Int на Duration
+-- заменить места, где мы передавали время в ожидания на WaitOptions
+-- заменить места, где мы передавали координаты двумя Int-параметрами на один параметр PointOption
+-- вот пример изменений - https://gist.github.com/KotovVitaliy/44ef1061f221dea23f174fd45a38549d

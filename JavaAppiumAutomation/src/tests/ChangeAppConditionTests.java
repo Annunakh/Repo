@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 public class ChangeAppConditionTests extends CoreTestCase {
 
     @Test
@@ -53,7 +55,7 @@ public class ChangeAppConditionTests extends CoreTestCase {
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Appium");
         SearchPageObject.waitForSearchResult("Appium");
-        driver.runAppInBackground(2);
+        driver.runAppInBackground(Duration.ofSeconds(5));
         SearchPageObject.waitForSearchResult("Appium");
     }
 }

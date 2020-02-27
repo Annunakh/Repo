@@ -8,8 +8,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 import java.util.List;
+import java.time.Duration;
 
 public class MainPageObject {
 
@@ -39,7 +42,6 @@ public class MainPageObject {
     public WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds) {
         MobileElement element = (MobileElement) waitForElementPresent(by, error_message, 5);
         element.setValue(value);
-//        element.sendKeys(value);
         return element;
     }
 
@@ -65,9 +67,10 @@ public class MainPageObject {
         int start_y = (int) (size.height * 0.8);
         int end_y = (int) (size.height * 0.2);
 
-        action.press(x, start_y)
-                .waitAction(timeOfSwipe)
-                .moveTo(x, end_y)
+        action
+                .press(PointOption.point(x, start_y))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
+                .moveTo(PointOption.point(x, end_y))
                 .release()
                 .perform();
     }
@@ -105,11 +108,11 @@ public class MainPageObject {
         int middle_y = (upper_y + lower_y) / 2;
 
         TouchAction action = new TouchAction(driver);
-        action.press(right_x, middle_y)
-                .waitAction(300)
-                .moveTo(left_x, middle_y)
-                .release()
-                .perform();
+        action.press(PointOption.point(right_x, middle_y));
+        action.waitAction(WaitOptions.waitOptions(Duration.ofMillis(300)));
+        action.moveTo(PointOption.point(left_x, middle_y));
+        action.release();
+        action.perform();
 
     }
 

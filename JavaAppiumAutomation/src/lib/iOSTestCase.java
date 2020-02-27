@@ -1,15 +1,16 @@
 package lib;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSDriver;
 import junit.framework.TestCase;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
-public class CoreTestCase extends TestCase {
-    protected AppiumDriver driver;
+public class iOSTestCase extends TestCase {
+    protected AppiumDriver<MobileElement> driver;
     private static String AppiumURL = "http://127.0.0.1:4723/wd/hub";
 
     @Override
@@ -18,16 +19,15 @@ public class CoreTestCase extends TestCase {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "emulator-5554");
-        capabilities.setCapability("platformVersion", "8.1");
-        capabilities.setCapability("appPackage", "org.wikipedia");
+        capabilities.setCapability("platformName", "iOS");
+        capabilities.setCapability("deviceName", "iPhone 8");
+        capabilities.setCapability("platformVersion", "13.3");
+        capabilities.setCapability("automationName", "Appium");
         capabilities.setCapability("orientation", "PORTRAIT");
-        capabilities.setCapability("appActivity", ".main.MainActivity");
         capabilities.setCapability("app",
-                "/Users/kkudzin/Desktop/Repo/JavaAppiumAutomation/apks/org.wikipedia.apk");
+                "/Users/kkudzin/Desktop/Repo/JavaAppiumAutomation/apks/Wikipedia.zip");
 
-        driver = new AndroidDriver<>(new URL(AppiumURL), capabilities);
+        driver = new IOSDriver(new URL(AppiumURL), capabilities);
     }
     @Override
     protected void tearDown() throws Exception {

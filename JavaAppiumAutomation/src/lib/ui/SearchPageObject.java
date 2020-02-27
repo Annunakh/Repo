@@ -21,7 +21,9 @@ public class SearchPageObject extends MainPageObject {
         SEARCH_BACK_BUTTON = "//android.widget.ImageButton[1]",
         SEARCH_RESULTS_LIST = "org.wikipedia:id/search_results_list",
         SEARCH_EMPTY_RESULT = "org.wikipedia:id/search_empty_view",
+        PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION = "//*android.view.ViewGroup/android.widget.TextView[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}'] and ./*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']",
         PAGE_LIST_ITEM_TITLE = "//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']",
+        PAGE_LIST_ITEM_TITLE_2 = "//*[@class='android.view.ViewGroup']/*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']",
         PAGE_LIST_ITEM_DESCRIPTION = "//*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']";
 
     public SearchPageObject(AppiumDriver driver) {
@@ -29,11 +31,9 @@ public class SearchPageObject extends MainPageObject {
     }
 
     /* TEMPLATES METHODS */
-    private static String[] getSearchResultByTitleAndDescription(String title, String description) {
-        String title_xpath = PAGE_LIST_ITEM_TITLE.replace("{TITLE}", title);
-        String description_xpath = PAGE_LIST_ITEM_DESCRIPTION.replace("{DESCRIPTION}", description);
-        String[] result = {title_xpath, description_xpath};
-        return result;
+    private static String getSearchResultByTitleAndDescription(String title, String description) {
+        String title_and_description_xpath = PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION.replace("{TITLE}", title).replace("{DESCRIPTION}", description);
+        return title_and_description_xpath;
     }
 
     private static String getResultSearchElement(String substring) {
@@ -139,18 +139,13 @@ public class SearchPageObject extends MainPageObject {
     }
 
     public void waitForElementByTitleAndDescription(String title, String description) {
-        String[] title_and_description_xpath = getSearchResultByTitleAndDescription(title, description);
-        String title_xpath = title_and_description_xpath[0];
-        String description_xpath = title_and_description_xpath[1];
+        String title_and_description_xpath = getSearchResultByTitleAndDescription(title, description);
+
+        System.out.println(title_and_description_xpath);
 
         waitForElementPresent(
-                By.xpath(title_xpath),
-                "Cannot find element with expected title: " + title,
-                10
-        );
-        waitForElementPresent(
-                By.xpath(description_xpath),
-                "Cannot find element with expected description: " + description,
+                By.xpath(title_and_description_xpath),
+                "Cannot find element with expected title: " + title + ", " + description,
                 10
         );
     }
