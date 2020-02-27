@@ -2,15 +2,14 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
 
 import java.util.List;
 
 public class NavigationUI extends MainPageObject {
 
     private static final String
-        MY_LISTS_LINK = "//android.widget.FrameLayout[@content-desc='My lists']",
-        DECLINE_SYNC_BUTTON = "//*[@text='NO THANKS']";
+        MY_LISTS_LINK = "xpath://android.widget.FrameLayout[@content-desc='My lists']",
+        DECLINE_SYNC_BUTTON = "xpath://*[@text='NO THANKS']";
 
     public NavigationUI(AppiumDriver driver) {
         super(driver);
@@ -27,7 +26,7 @@ public class NavigationUI extends MainPageObject {
 
     public void clickMyLists() {
         this.waitForElementAndClick(
-                By.xpath(MY_LISTS_LINK),
+                MY_LISTS_LINK,
                 "Cannot find navigation button to 'My lists'",
                 5
         );
@@ -35,7 +34,7 @@ public class NavigationUI extends MainPageObject {
 
     public void declineSyncMyLists() {
         this.waitForElementAndClick(
-                By.xpath(DECLINE_SYNC_BUTTON),
+                DECLINE_SYNC_BUTTON,
                 "Cannot decline sync reading list",
                 5
         );
