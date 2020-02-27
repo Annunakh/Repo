@@ -13,6 +13,7 @@ import io.appium.java_client.touch.offset.PointOption;
 
 import java.util.List;
 import java.time.Duration;
+import java.util.regex.Pattern;
 
 public class MainPageObject {
 
@@ -132,5 +133,18 @@ public class MainPageObject {
     public String waitForElementAndGetAttribute(By by, String attribute, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+    private By getLocatorString(String locator_with_type) {
+        String[] exploded_locator = locator_with_type.split(Pattern.quote(":"), 2);
+        String by_type = exploded_locator[0];
+        String locator = exploded_locator[1];
+
+        if (by_type.equals("xpath")) {
+            return By.xpath(locator);
+        } else if (by_type.equals("id")) {
+            return By.id(locator);
+        } else {
+            throw new IllegalArgumentException("Cannot get type of locator " + locator_with_type);
+        }
     }
 }

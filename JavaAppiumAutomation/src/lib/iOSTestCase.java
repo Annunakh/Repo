@@ -22,10 +22,9 @@ public class iOSTestCase extends TestCase {
         capabilities.setCapability("platformName", "iOS");
         capabilities.setCapability("deviceName", "iPhone 8");
         capabilities.setCapability("platformVersion", "13.3");
-        capabilities.setCapability("automationName", "Appium");
         capabilities.setCapability("orientation", "PORTRAIT");
         capabilities.setCapability("app",
-                "/Users/kkudzin/Desktop/Repo/JavaAppiumAutomation/apks/Wikipedia.zip");
+                "/Users/kkudzin/Desktop/Repo2/JavaAppiumAutomation/apks/Wikipedia.app.zip");
 
         driver = new IOSDriver(new URL(AppiumURL), capabilities);
     }
