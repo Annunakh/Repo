@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05a2988a-f4b9-435f-bec9-f77993a6805c" name="Default Changelist" comment="" />
+    <list default="true" id="05a2988a-f4b9-435f-bec9-f77993a6805c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/java_client_6_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/java_client_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/selenium_server_standalone_3_4_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/selenium_server_standalone_3_14_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaAppiumAutomation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaAppiumAutomation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/CoreTestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/CoreTestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/iOSTestCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/Ex8Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homeworks/Ex8Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/iOS/GetStartedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GetStartedTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +33,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1X4PlDrOKSzsgSJ7brUAZwjmiI8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +45,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -75,6 +99,10 @@
       <screen x="0" y="23" width="1920" height="986" />
     </state>
     <state x="931" y="177" key="#Project_Structure/0.23.1920.986@0.23.1920.986" timestamp="1580302568159" />
+    <state x="565" y="415" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1583493945569">
+      <screen x="0" y="23" width="1920" height="1004" />
+    </state>
+    <state x="565" y="415" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1920.1004@0.23.1920.1004" timestamp="1583493945569" />
     <state width="1200" height="264" key="GridCell.Tab.0.bottom" timestamp="1580307418716">
       <screen x="0" y="23" width="1920" height="980" />
     </state>
@@ -115,9 +143,10 @@
       <screen x="0" y="23" width="1920" height="982" />
     </state>
     <state width="1200" height="326" key="GridCell.Tab.1.right/0.23.1920.982@0.23.1920.982" timestamp="1580305884436" />
-    <state x="744" y="98" key="SettingsEditor" timestamp="1580304375153">
-      <screen x="0" y="23" width="1920" height="986" />
+    <state x="744" y="99" key="SettingsEditor" timestamp="1583495144063">
+      <screen x="0" y="23" width="1920" height="1004" />
     </state>
+    <state x="744" y="99" key="SettingsEditor/0.23.1920.1004@0.23.1920.1004" timestamp="1583495144063" />
     <state x="744" y="98" key="SettingsEditor/0.23.1920.984@0.23.1920.984" timestamp="1580303208023" />
     <state x="744" y="98" key="SettingsEditor/0.23.1920.986@0.23.1920.986" timestamp="1580304375153" />
   </component>

@@ -1,3 +1,5 @@
+package homeworks;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.junit.After;
@@ -12,8 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.util.List;
 
-public class Ex1 {
+public class Ex2 {
     private AppiumDriver<MobileElement> driver;
 
     @Before
@@ -36,7 +39,7 @@ public class Ex1 {
     }
 
     @Test
-    public void testTextIsPresent() {
+    public void testCheckSearchResultIsNotPresent() {
 
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'SKIP')]"),
@@ -45,23 +48,41 @@ public class Ex1 {
         );
 
         waitForElementAndClick(
-                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
-                "Cannot find element to init search",
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find 'Search Wikipedia' input",
+                10
+        );
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Java",
+                "Cannot find search input",
                 5
         );
 
-        WebElement search_field = waitForElementPresent(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find search field",
-                15
+        waitForElementPresent(
+                By.id("org.wikipedia:id/search_results_list"),
+                "There is no result",
+                10
         );
 
-        String search_source_text = search_field.getAttribute("text");
+        List<MobileElement> search_results =
+                driver.findElements(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+                        "/android.view.ViewGroup"));
 
-        Assert.assertEquals(
-                "Expected text is not present",
-                "Search...",
-                search_source_text
+        Assert.assertTrue(
+                "The result list is empty",
+                search_results.size() > 0
+        );
+
+        List<MobileElement> buttons = driver.findElementsByClassName("android.widget.ImageButton");
+        MobileElement backButton = buttons.get(0);
+        backButton.click();
+
+        waitForElementNotPresent(
+                By.id("org.wikipedia:id/search_results_list"),
+                "Results is still present on the page",
+                5
         );
     }
 
@@ -72,10 +93,27 @@ public class Ex1 {
                 ExpectedConditions.presenceOfElementLocated(by)
         );
     }
+    private WebElement waitForElementPresent(By by, String error_message) {
+        return waitForElementPresent(by, error_message, 5);
+    }
 
     private WebElement waitForElementAndClick(By by, String error_message, long timeoutINSec) {
         WebElement element = waitForElementPresent(by, error_message, 5);
         element.click();
         return element;
+    }
+
+    private WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutINSec) {
+        WebElement element = waitForElementPresent(by, error_message, 5);
+        element.sendKeys(value);
+        return element;
+    }
+
+    private boolean waitForElementNotPresent(By by, String error_message, long timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(error_message + "\n");
+        return wait.until(
+                ExpectedConditions.invisibilityOfElementLocated(by)
+        );
     }
 }
