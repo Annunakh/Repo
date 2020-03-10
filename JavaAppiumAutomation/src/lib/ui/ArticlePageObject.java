@@ -17,7 +17,8 @@ abstract public class ArticlePageObject extends MainPageObject {
         CREATED_FOLDER_BUTTON,
         MY_LIST_NAME_INPUT,
         BACK_BUTTON,
-        MY_LIST_OK_BUTTON;
+        MY_LIST_OK_BUTTON,
+        ARTICLE_IMAGE;
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
