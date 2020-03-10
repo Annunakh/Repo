@@ -25,7 +25,7 @@ abstract public class SearchPageObject extends MainPageObject {
         SEARCH_EMPTY_RESULT,
         PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION,
         PAGE_LIST_ITEM_TITLE,
-        PAGE_LIST_ITEM_TITLE_2,
+        PAGE_LIST_ITEM_FULL_NAME,
         AMOUNT_OF_ELEMENTS,
         PAGE_LIST_ITEM_DESCRIPTION;
 
@@ -35,8 +35,13 @@ abstract public class SearchPageObject extends MainPageObject {
 
     /* TEMPLATES METHODS */
     private static String getSearchResultByTitleAndDescription(String title, String description) {
-        String title_and_description_xpath = PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION.replace("{TITLE}", title).replace("{DESCRIPTION}", description);
-        return title_and_description_xpath;
+        return PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION.replace("{TITLE}", title).replace("{DESCRIPTION}", description);
+    }
+
+    private static String getSearchResultByFullName(String title, String description) {
+        String full_name = title + " " + description;
+        System.out.println(full_name);
+        return PAGE_LIST_ITEM_FULL_NAME.replace("{SUBSTRING}", full_name);
     }
 
     private static String getResultSearchElement(String substring) {
@@ -150,6 +155,15 @@ abstract public class SearchPageObject extends MainPageObject {
                 title_and_description_xpath,
                 "Cannot find element with expected title: " + title + ", " + description,
                 10
+        );
+    }
+    public void waitForElementByFullName(String title, String description) {
+        String full_name_xpath = getSearchResultByFullName(title, description);
+        System.out.println(full_name_xpath);
+        waitForElementPresent(
+                full_name_xpath,
+                "Cannot find element with expected title: " + title + " " + description,
+                20
         );
     }
 }

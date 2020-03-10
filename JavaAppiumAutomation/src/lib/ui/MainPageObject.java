@@ -33,6 +33,7 @@ public class MainPageObject {
                 ExpectedConditions.presenceOfElementLocated(by)
         );
     }
+
     public WebElement waitForElementPresent(String locator, String error_message) {
         return waitForElementPresent(locator, error_message, 5);
     }
@@ -148,6 +149,7 @@ public class MainPageObject {
     public int get_amount_of_elements(String locator) {
         By by = this.getLocatorByString(locator);
         List elements = driver.findElements(by);
+        System.out.println(elements.size());
         return elements.size();
     }
 

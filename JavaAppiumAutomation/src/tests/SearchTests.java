@@ -1,6 +1,7 @@
 package tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
@@ -90,7 +91,13 @@ public class SearchTests extends CoreTestCase {
         for (Map.Entry<String, String> entry : results_to_check.entrySet()) {
             String title = entry.getKey();
             String description = entry.getValue();
-            SearchPageObject.waitForElementByTitleAndDescription(title, description);
+
+            if (Platform.getInstance().isAndroid()) {
+                SearchPageObject.waitForElementByTitleAndDescription(title, description);
+            } else {
+                SearchPageObject.waitForElementByFullName(title, description);
+            }
+
         }
     }
 }
