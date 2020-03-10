@@ -5,11 +5,11 @@ import io.appium.java_client.MobileElement;
 
 import java.util.List;
 
-public class NavigationUI extends MainPageObject {
+abstract public class NavigationUI extends MainPageObject {
 
-    private static final String
-        MY_LISTS_LINK = "xpath://android.widget.FrameLayout[@content-desc='My lists']",
-        DECLINE_SYNC_BUTTON = "xpath://*[@text='NO THANKS']";
+    protected static String
+        MY_LISTS_LINK,
+        DECLINE_SYNC_BUTTON;
 
     public NavigationUI(AppiumDriver driver) {
         super(driver);

@@ -10,22 +10,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String
-        SKIP_BUTTON = "xpath://*[contains(@text, 'SKIP')]",
-        SEARCH_INIT_ELEMENT = "xpath://*[contains(@text, 'Search Wikipedia')]",
-        SEARCH_INPUT = "id:org.wikipedia:id/search_src_text",
-        SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING}']",
-        SEARCH_DESCRIPTION_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']",
-        SEARCH_BACK_BUTTON = "xpath:/android.widget.ImageButton[1]",
-        SEARCH_RESULTS_LIST = "id:org.wikipedia:id/search_results_list",
-        SEARCH_EMPTY_RESULT = "id:org.wikipedia:id/search_empty_view",
-        PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION = "xpath://*android.view.ViewGroup/android.widget.TextView[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}'] and ./*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']",
-        PAGE_LIST_ITEM_TITLE = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']",
-        PAGE_LIST_ITEM_TITLE_2 = "xpath://*[@class='android.view.ViewGroup']/*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']",
-        AMOUNT_OF_ELEMENTS = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']/*[@class='android.view.ViewGroup']",
-        PAGE_LIST_ITEM_DESCRIPTION = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']";
+    protected static String
+        SKIP_BUTTON,
+        SEARCH_INIT_ELEMENT,
+        SEARCH_INPUT,
+        CLOSE_BTN,
+        SEARCH_RESULT_BY_SUBSTRING_TPL,
+        SEARCH_RESULT_ELEMENT,
+        SEARCH_DESCRIPTION_BY_SUBSTRING_TPL,
+        SEARCH_BACK_BUTTON,
+        SEARCH_RESULTS_LIST,
+        SEARCH_EMPTY_RESULT,
+        PAGE_LIST_ITEM_TITLE_AND_DESCRIPTION,
+        PAGE_LIST_ITEM_TITLE,
+        PAGE_LIST_ITEM_TITLE_2,
+        AMOUNT_OF_ELEMENTS,
+        PAGE_LIST_ITEM_DESCRIPTION;
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);

@@ -1,20 +1,23 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.openqa.selenium.WebElement;
 
-public class ArticlePageObject extends MainPageObject {
+abstract public class ArticlePageObject extends MainPageObject {
 
-    private static final String
-        TITLE_TPL = "xpath://*[@class='android.view.View']/*[@content-desc='{article_title}']",
-        TITLE = "xpath://*[@class='android.view.View'][@resource-id='pagelib_edit_section_title_description']",
-        FOOTER_ELEMENT = "xpath://*[@resource-id='org.wikipedia:id/page_external_link'][@text='View page in browser']",
-        ADD_ARTICLE_BUTTON = "id:org.wikipedia:id/article_menu_bookmark",
-        ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
-        CREATE_NEW_LIST_BUTTON = "id:org.wikipedia:id/create_button",
-        CREATED_FOLDER_BUTTON = "xpath://*[@resource-id='org.wikipedia:id/item_title'][@text='{FOLDER}'] ",
-        MY_LIST_NAME_INPUT = "xpath://*[@resource-id='org.wikipedia:id/text_input'][@text='Name of this list']",
-        MY_LIST_OK_BUTTON = "xpath://*[@resource-id='android:id/button1'][@text='OK']";
+    protected static String
+        TITLE_TPL,
+        TITLE,
+        FOOTER_ELEMENT,
+        FOOTER_ELEMENT_2,
+        ADD_ARTICLE_BUTTON,
+        ADD_TO_MY_LIST_OVERLAY,
+        CREATE_NEW_LIST_BUTTON,
+        CREATED_FOLDER_BUTTON,
+        MY_LIST_NAME_INPUT,
+        BACK_BUTTON,
+        MY_LIST_OK_BUTTON;
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
@@ -43,11 +46,19 @@ public class ArticlePageObject extends MainPageObject {
     }
 
     public void swipeToFooter() {
-        this.swipeUpToFindElement(
-                FOOTER_ELEMENT,
-                "Cannot find the end of the page",
-                20
-        );
+        if (Platform.getInstance().isAndroid()) {
+            this.swipeUpToFindElement(
+                    FOOTER_ELEMENT,
+                    "Cannot find the end of article",
+                    40
+            );
+        } else {
+            this.swipeUpTillElementAppear(
+                    FOOTER_ELEMENT,
+                    "Cannot find the end of the page",
+                    40
+            );
+        }
     }
 
     public void addArticleToMyList(String name_of_folder) {
@@ -94,5 +105,13 @@ public class ArticlePageObject extends MainPageObject {
                 "Cannot find created reading list",
                 5
         );
+    }
+
+    public void addArticlesToMySaved() {
+        this.waitForElementAndClick(ADD_ARTICLE_BUTTON, "Cannot find option to add article to reading list", 5);
+    }
+
+    public void pressIOSBackBtn() {
+        this.waitForElementAndClick(BACK_BUTTON, "Cannot find back button", 5);
     }
 }

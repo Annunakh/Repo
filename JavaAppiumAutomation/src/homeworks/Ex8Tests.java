@@ -5,13 +5,17 @@ import lib.ui.ArticlePageObject;
 import lib.ui.MyListsPageObject;
 import lib.ui.NavigationUI;
 import lib.ui.SearchPageObject;
+import lib.ui.factories.ArticlePageObjectFactory;
+import lib.ui.factories.MyListsPageObjectFactory;
+import lib.ui.factories.NavigationUIFactory;
+import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
 public class Ex8Tests extends CoreTestCase {
 
     @Test
     public void testCheckEveryResultContainsExpectedText() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.skipOnBoarding();
         SearchPageObject.initSearchInput();
@@ -23,19 +27,19 @@ public class Ex8Tests extends CoreTestCase {
 
     @Test
     public void testRemoveOneOfSavedArticlesFromReadingList() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.skipOnBoarding();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Appium");
         SearchPageObject.clickByArticleWithSubstring("Appium");
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
 
         String name_of_folder = "Learning programming";
         ArticlePageObject.addArticleToMyList(name_of_folder);
 
-        NavigationUI NavigationUI = new NavigationUI(driver);
+        NavigationUI NavigationUI = NavigationUIFactory.get(driver);
 
         NavigationUI.pressBackButton();
         NavigationUI.declineSyncMyLists();
@@ -49,7 +53,7 @@ public class Ex8Tests extends CoreTestCase {
         NavigationUI.declineSyncMyLists();
         NavigationUI.clickMyLists();
 
-        MyListsPageObject MyListPageObject = new MyListsPageObject(driver);
+        MyListsPageObject MyListPageObject = MyListsPageObjectFactory.get(driver);
 
         MyListPageObject.openFolderByName(name_of_folder);
 
@@ -71,7 +75,7 @@ public class Ex8Tests extends CoreTestCase {
 
     @Test
     public void testAssertArticleTitleIsPresent() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.skipOnBoarding();
         SearchPageObject.initSearchInput();

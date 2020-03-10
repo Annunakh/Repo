@@ -4,16 +4,16 @@ import io.appium.java_client.AppiumDriver;
 import junit.framework.TestCase;
 import org.openqa.selenium.ScreenOrientation;
 
+import java.time.Duration;
+
 public class CoreTestCase extends TestCase {
 
     protected AppiumDriver driver;
-    protected Platform Platform;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        this.Platform = new Platform();
-        driver = this.Platform.getDriver();
+        driver = Platform.getInstance().getDriver();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class CoreTestCase extends TestCase {
         driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
-    protected void backgroundApp(int seconds) {
-        driver.runAppInBackground(seconds);
+    protected void backgroundApp(Duration duration) {
+        driver.runAppInBackground(duration);
     }
 }
