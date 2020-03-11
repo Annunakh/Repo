@@ -39,7 +39,7 @@ abstract public class SearchPageObject extends MainPageObject {
     }
 
     private static String getSearchResultByFullName(String title, String description) {
-        String full_name = title + " " + description;
+        String full_name = title + "\n" + description;
         System.out.println(full_name);
         return PAGE_LIST_ITEM_FULL_NAME.replace("{SUBSTRING}", full_name);
     }

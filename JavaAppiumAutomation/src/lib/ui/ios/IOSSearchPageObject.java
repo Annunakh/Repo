@@ -17,7 +17,7 @@ public class IOSSearchPageObject extends SearchPageObject {
         AMOUNT_OF_ELEMENTS ="xpath://XCUIElementTypeOther[2]/XCUIElementTypeCollectionView/XCUIElementTypeCell";
         PAGE_LIST_ITEM_TITLE ="xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']";
         PAGE_LIST_ITEM_DESCRIPTION ="xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']";
-        PAGE_LIST_ITEM_FULL_NAME ="xpath:/XCUIElementTypeCell/XCUIElementTypeLink[contains(@name,'{SUBSTRING}')]";
+        PAGE_LIST_ITEM_FULL_NAME ="xpath://XCUIElementTypeCell/XCUIElementTypeLink[contains(@name,'{SUBSTRING}')]";
     }
     public IOSSearchPageObject(AppiumDriver driver) {
         super(driver);
